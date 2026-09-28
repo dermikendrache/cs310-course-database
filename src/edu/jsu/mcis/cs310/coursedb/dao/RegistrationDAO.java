@@ -63,7 +63,14 @@ public class RegistrationDAO {
             
             if (conn.isValid(0)) {
                 
-                ps = conn.prepareStatement("Delete from registration: stu")
+                ps = conn.prepareStatement("Delete from registration: studentid = ? termid = ? crn = ?");
+                ps.setInt(1, studentid);
+                ps.setInt(2, termid);
+                ps.setInt(3, crn);
+
+                int affectedrows = ps.executeUpdate();
+
+                result = affectedrows > 0;
                 
             }
             
@@ -92,9 +99,11 @@ public class RegistrationDAO {
             Connection conn = daoFactory.getConnection();
             
             if (conn.isValid(0)) {
-                
-                // INSERT YOUR CODE HERE
-                
+                ps= conn.prepareStatement("Delete registration: Studentid = ? termid = ?");
+                ps.setInt(1, studentid);
+                ps.setInt(2, termid);
+                int affectedrows = ps.executeUpdate();
+                result = affectedrows > 0; 
             }
             
         }
@@ -125,7 +134,7 @@ public class RegistrationDAO {
             
             if (conn.isValid(0)) {
                 
-                // INSERT YOUR CODE HERE
+               ps 
                 
             }
             
