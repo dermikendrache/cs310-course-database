@@ -9,36 +9,43 @@ public class DAOUtility {
     public static final int TERMID_SP26 = 1;
     
     public static String getResultSetAsJson(ResultSet rs) {
-        
-        JsonArray records = new JsonArray();
-        
-        try {
-        
-            if (rs != null) {
-                ResultSetMetaData metadata = rs.getMetaData();
-                int colCount = metadata.getColumnCount();
-                
-                
-                while (rs.next()) {
-                    JsonObject recording = new JsonObject();
-                    
-                    for (int i= 1; i<=colCount; i++){
-                        String colname =metadata.getColumnName(i);
-                        Object value = rs.getObject(i);
-                        recording.put(colname, value);
-                }
-                    records.add(recording);
+
+    JsonArray records = new JsonArray();
+
+    try {
+
+        if (rs != null) {
+
+            ResultSetMetaData metadata = rs.getMetaData();
+            int colCount = metadata.getColumnCount();
+
+            while (rs.next()) {
+
+                JsonObject record = new JsonObject();
+
+                for (int i = 1; i <= colCount; i++) {
+
+                    String columnName = metadata.getColumnName(i);
+                    String value = rs.getString(i);
+
+                    record.put(columnName, value);
+
                 }
 
+                records.add(record);
+
             }
-            
+
         }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        return Jsoner.serialize(records);
-        
+
     }
+    catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return Jsoner.serialize(records);
+
+}
+
     
 }
