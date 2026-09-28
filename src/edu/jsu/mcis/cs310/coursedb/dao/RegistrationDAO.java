@@ -27,7 +27,12 @@ public class RegistrationDAO {
             
             if (conn.isValid(0)) {
                 
-                // INSERT YOUR CODE HERE
+               ps = conn.prepareStatement("Enter registration: Studentid, termid, crn. ");
+               ps.setInt(1,studentid);
+               ps.setInt(2,termid);
+               ps.setInt(3,crn);
+               int affectedrow = ps.executeUpdate();
+               result = affectedrow > 0;
                 
             }
             
@@ -58,7 +63,7 @@ public class RegistrationDAO {
             
             if (conn.isValid(0)) {
                 
-                // INSERT YOUR CODE HERE
+                ps = conn.prepareStatement("Delete from registration: stu")
                 
             }
             
